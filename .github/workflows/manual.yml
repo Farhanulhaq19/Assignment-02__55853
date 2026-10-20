@@ -22,4 +22,8 @@ jobs:
       - name: Display inputs
         run: |
           echo "${{ github.event.inputs.greeting }}, ${{ github.event.inputs.name }}!"
+<<<<<<< HEAD
           echo "extra data: ${{ github.event.inputs.data }}"
+=======
+          echo "extra data: ${{ github.event.inputs.data }}"
+>>>>>>> 858b771d104ca26b80ececa010327e888da1b954
