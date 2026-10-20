@@ -1,8 +1,8 @@
-﻿name: Self Hosted
+name: Self Hosted
 on: [push]
 jobs:
   local:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Show runner info
         run: echo "Running on my own laptop!"
