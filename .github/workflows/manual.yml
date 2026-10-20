@@ -5,7 +5,7 @@ on:
       name:
         description: 'Enter your name'
         required: true
-        default: 'Farhan Ul Haq'
+        default: 'Farhan'
       greeting:
         description: 'Enter a greeting'
         required: true
@@ -13,13 +13,13 @@ on:
       data:
         description: 'Enter extra information'
         required: true
-        default: 'DevOps GitHub Actions'
+        default: 'DevOps CLI'
 
 jobs:
-  manual:
+  greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Show greeting
-        run: echo "${{ github.event.inputs.greeting }} ${{ github.event.inputs.name }}"
-      - name: Show data
-        run: echo "${{ github.event.inputs.data }}"
+      - name: Display inputs
+        run: |
+          echo "${{ github.event.inputs.greeting }}, ${{ github.event.inputs.name }}!"
+          echo "extra data: ${{ github.event.inputs.data }}"
