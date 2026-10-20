@@ -1,0 +1,22 @@
+﻿name: Postgres Database
+on: [push]
+jobs:
+  postgres-job:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Check postgres connection
+        run: |
+          echo "Postgres is up and running!"
+          pg_isready -h localhost -p 5432 -U postgres
