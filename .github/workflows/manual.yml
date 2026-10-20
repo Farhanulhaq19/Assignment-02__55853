@@ -5,7 +5,7 @@ on:
       name:
         description: 'Enter your name'
         required: true
-        default: 'Afaq Ahmed'
+        default: 'Farhan Ul Haq'
       greeting:
         description: 'Enter a greeting'
         required: true
