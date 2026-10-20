@@ -1,0 +1,11 @@
+name: Webhook Workflow
+on:
+  repository_dispatch:
+    types: [custom-webhook]
+
+jobs:
+  webhook-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show webhook payload
+        run: echo "Received message: ${{ github.event.client_payload.message }}"
