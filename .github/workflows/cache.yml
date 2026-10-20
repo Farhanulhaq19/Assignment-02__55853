@@ -1,12 +1,22 @@
-﻿name: Cache Dependencies
+﻿name: Dependency Cache
 on: [push]
+
 jobs:
-  cache-job:
+  cache:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Cache node modules
-        uses: actions/cache@v3
+      - name: Set up job
+        run: echo "Starting job"
+        
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          python-version: '3.12'
+          cache: 'pip' # This enables the cache you see in the screenshot
+          
+      - name: Run pip install
+        run: pip install -r requirements.txt
+        
+      - name: Run python
+        run: python -c "import requests; print('Requests installed successfully!')"
