@@ -1,13 +1,16 @@
-﻿name: Postgres Database
+﻿name: Postgres Service
 on: [push]
+
 jobs:
-  postgres-job:
+  database-test:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:16
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
         ports:
           - 5432:5432
         options: >-
@@ -16,7 +19,11 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - name: Check postgres connection
+      - name: Install client
+        run: sudo apt-get install -y postgresql-client
+      
+      - name: Test database connection
         run: |
-          echo "Postgres is up and running!"
-          pg_isready -h localhost -p 5432 -U postgres
+          psql -h localhost -U testuser -d testdb -c "SELECT 'Database is working' AS result;"
+        env:
+          PGPASSWORD: testpass
