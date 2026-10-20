@@ -1,8 +1,30 @@
-﻿name: Contexts
+﻿name: Contexts and Conditions
 on: [push]
+
 jobs:
-  context-job:
+  inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Show context
-        run: echo "Repo is ${{ github.repository }}"
+      - name: Print context information
+        run: |
+          echo "user: ${{ github.actor }}"
+          echo "event: ${{ github.event_name }}"
+          echo "operating system: ${{ runner.os }}"
+          echo "repository: ${{ github.repository }}"
+          echo "application: DevOpsDemo"
+          
+      - name: Run after success
+        if: success()
+        run: echo "Previous steps succeeded"
+        
+      - name: Run after failure
+        if: failure()
+        run: echo "A previous step failed"
+        
+      - name: Always run
+        if: always()
+        run: echo "This step runs regardless of earlier outcomes"
+        
+      - name: Check event type
+        if: github.event_name == 'push'
+        run: echo "This is a push event"
