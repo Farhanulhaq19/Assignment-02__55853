@@ -1,11 +1,20 @@
-﻿name: Multi OS
+﻿name: Multi OS Runners
 on: [push]
+
 jobs:
-  multi-os-job:
+  test:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Show OS
+      - name: Display operating system
         run: echo "Running on ${{ matrix.os }}"
+        
+      - name: Windows PowerShell
+        if: matrix.os == 'windows-latest'
+        run: $PSVersionTable
+        
+      - name: macOS Swift
+        if: matrix.os == 'macos-latest'
+        run: swift --version
