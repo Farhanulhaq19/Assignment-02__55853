@@ -1,0 +1,11 @@
+﻿name: Matrix Build
+on: [push]
+jobs:
+  matrix-job:
+    strategy:
+      matrix:
+        version: [10, 12, 14]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show version
+        run: echo "Testing version ${{ matrix.version }}"

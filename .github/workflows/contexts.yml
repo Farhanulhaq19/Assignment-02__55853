@@ -1,0 +1,8 @@
+﻿name: Contexts
+on: [push]
+jobs:
+  context-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show context
+        run: echo "Repo is ${{ github.repository }}"

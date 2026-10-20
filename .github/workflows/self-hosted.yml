@@ -1,0 +1,8 @@
+﻿name: Self Hosted
+on: [push]
+jobs:
+  self-hosted-job:
+    runs-on: self-hosted
+    steps:
+      - name: Show runner info
+        run: echo "Running on a self-hosted runner"

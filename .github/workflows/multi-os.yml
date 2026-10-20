@@ -1,0 +1,11 @@
+﻿name: Multi OS
+on: [push]
+jobs:
+  multi-os-job:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Show OS
+        run: echo "Running on ${{ matrix.os }}"
