@@ -1,11 +1,17 @@
 ﻿name: Matrix Build
 on: [push]
+
 jobs:
-  matrix-job:
+  matrix:
     strategy:
       matrix:
-        version: [10, 12, 14]
-    runs-on: ubuntu-latest
+        os: [ubuntu-latest, windows-latest]
+        version: [3.11, 3.12]
+    runs-on: ${{ matrix.os }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.version }}
       - name: Show version
-        run: echo "Testing version ${{ matrix.version }}"
+        run: echo "Running on ${{ matrix.os }} with Python ${{ matrix.version }}"
